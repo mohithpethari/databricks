@@ -58,7 +58,7 @@ permissions:
 
 jobs:
   Centralized_Databricks_Deployment:
-    uses: uhc-tech-medicare-retiree-common/MDP-Centralized-CICD/.github/workflows/code_deploy_standardized_v2.yml@sounak/cicd
+    uses: mohithpethari/centralizecode/.github/workflows/centralizedmain.yml@mohith_dev
     with:
       environment: ${{ inputs.environment }}
       source_path: ${{ inputs.source_path }}
