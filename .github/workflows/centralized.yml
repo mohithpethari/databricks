@@ -1,0 +1,71 @@
+name: Databricks_Centralized_CICD
+
+on:
+  workflow_dispatch:
+    inputs:
+      team:
+        description: 'Team name'
+        required: false
+        type: choice
+        options:
+          - 'MRDP-PIE'
+
+      environment:
+        description: 'All Operations - Target environment'
+        required: false
+        type: choice
+        options:
+          - 'mrdp-pie-dev'
+          - 'mrdp-pie-stg'
+          - 'mrdp-pie-prod'
+
+      source_path:
+        description: 'Notebook Deploy - Local source path'
+        required: false
+        type: string
+
+      destination_path:
+        description: 'Notebook Deploy - Databricks destination path'
+        required: false
+        type: string
+
+      choice:
+        description: 'Workflow Job Deploy - Job operation'
+        required: false
+        type: choice
+        options:
+          - Create_new_job
+          - Update_existing_job
+
+      job:
+        description: 'Workflow Job Deploy - JSON file path'
+        required: false
+        type: string
+
+      Source_file:
+        description: 'YAML Config - Local source path'
+        required: false
+        type: string
+
+      storage_container:
+        description: 'YAML Config - Azure storage container path'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  Centralized_Databricks_Deployment:
+    uses: uhc-tech-medicare-retiree-common/MDP-Centralized-CICD/.github/workflows/code_deploy_standardized_v2.yml@sounak/cicd
+    with:
+      environment: ${{ inputs.environment }}
+      source_path: ${{ inputs.source_path }}
+      destination_path: ${{ inputs.destination_path }}
+      job_type: ${{ inputs.choice }}
+      job: ${{ inputs.job }}
+      Source_file: ${{ inputs.Source_file }}
+      storage_container: ${{ inputs.storage_container }}
+      team: ${{ inputs.team }}
+    secrets: inherit
