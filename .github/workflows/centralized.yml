@@ -15,9 +15,9 @@ on:
         required: false
         type: choice
         options:
-          - 'mrdp-pie-dev'
-          - 'mrdp-pie-stg'
-          - 'mrdp-pie-prod'
+          - 'dev'
+          - 'stg'
+          - 'prod'
 
       source_path:
         description: 'Notebook Deploy - Local source path'
